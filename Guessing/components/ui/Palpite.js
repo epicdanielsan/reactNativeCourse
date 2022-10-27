@@ -7,12 +7,12 @@ const Palpite = ({ children }) => {
 
 const styles = StyleSheet.create({
   title: {
+    fontFamily: "open-sans-bold",
     fontSize: 25,
-    fontWeight: "bold",
     color: "#fff",
     textAlign: "center",
     borderWidth: 2,
-    borderColor: Colors.accent,
+    borderColor: "#fff",
     padding: 12,
   },
 });

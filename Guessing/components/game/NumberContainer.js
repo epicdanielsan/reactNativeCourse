@@ -14,15 +14,15 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: Colors.accent,
     padding: 24,
-    margin: 24,
+    margin: 20,
     borderRadius: 8,
     justifyContent: "center",
     alignItems: "center",
   },
   numberText: {
+    fontFamily: "open-sans-bold",
     color: Colors.accent,
     fontSize: 36,
-    fontWeight: "bold",
   },
 });
 
