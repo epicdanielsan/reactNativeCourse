@@ -1,45 +1,73 @@
-import { FlatList, Image, Platform, StyleSheet, Text, View } from "react-native"
-
+import { useNavigation } from "@react-navigation/native";
+import { useLayoutEffect } from "react";
+import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import IconButton from "./IconButton";
+import List from "./MealDetail/List";
+import Subtitle from "./MealDetail/Subtitle";
+import MealShortInfo from "./MealShortInfo";
 
 const MealDetails = (props) => {
-    return(
-        <View style={styles.boxContainer}>
-            <View style={styles.innerContainer}>
-                <View style={styles.imageContainer}>
-                    <Image source={{uri: props.imageUrl}} style={styles.image}/>
-                    <Text style={styles.title}>{props.title}</Text>
-                </View>
-                <View style={styles.infoContainer}>
-                    <FlatList data={props.data} renderItem={props.render}/>
-                </View>
-            </View>
+  const navigation = useNavigation();
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <IconButton
+          onPress={props.favoriteHandler}
+          name="star"
+          size={26}
+          color="#fff"
+        />
+      ),
+    });
+  }, [navigation, props.favoriteHandler]);
+
+  return (
+    <ScrollView style={styles.boxContainer}>
+      <Image source={{ uri: props.imageUrl }} style={styles.image} />
+      <Text style={styles.title}>{props.title}</Text>
+      <MealShortInfo
+        affordability={props.affordability}
+        complexity={props.complexity}
+        duration={props.duration}
+        textStyle={styles.textStyle}
+      />
+      <View style={styles.listOuterContainer}>
+        <View style={styles.listContainer}>
+          <Subtitle>Ingredients</Subtitle>
+          <List itensList={props.ingredients} />
+          <Subtitle>Steps</Subtitle>
+          <List itensList={props.steps} />
         </View>
-    )
-}
+      </View>
+    </ScrollView>
+  );
+};
 
 const styles = StyleSheet.create({
-    boxContainer: {
-        flex: 1,
-        backgroundColor: "#fff",
-    },
-    innerContainer: {
-        flex: 1
-    },
-    imageContainer: {
-        height: 300,
-        marginBottom: 30
-    },
-    image: {
-        flex: 1
-    },
-    title: {
-        textAlign: "center",
-        fontSize: 20,
-        fontWeight: "bold"
-    },
-    infoContainer: {
-        padding: 10
-    }
-})
+  boxContainer: {
+    marginBottom: 32,
+  },
+  image: {
+    width: "100%",
+    height: 350,
+  },
+  title: {
+    textAlign: "center",
+    fontSize: 24,
+    fontWeight: "bold",
+    margin: 8,
+    color: "#fff",
+  },
+  textStyle: {
+    color: "#fff",
+  },
+  listContainer: {
+    maxWidth: "80%",
+  },
+  listOuterContainer: {
+    alignItems: "center",
+  },
+});
 
-export default MealDetails
+export default MealDetails;
