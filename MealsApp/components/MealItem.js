@@ -7,10 +7,10 @@ import {
   View,
 } from "react-native";
 
-const MealItem = ({ title, imageUrl, affordability, complexity, duration }) => {
+const MealItem = ({ title, imageUrl, affordability, complexity, duration, onPress }) => {
   return (
     <View style={styles.boxContainer}>
-      <Pressable android_ripple={{ color: "#cccc" }}>
+      <Pressable android_ripple={{ color: "#cccc" }}  style={({pressed}) => pressed ? styles.buttomPressed : null} onPress={onPress}>
         <View style={styles.innerContainer}>
           <View>
             <Image source={{ uri: imageUrl }} style={styles.image} />
@@ -49,9 +49,8 @@ const styles = StyleSheet.create({
   },
   title: {
     textAlign: "center",
-    fontSize: 18,
-    fontWeight: "bold",
-    margin: 8,
+    fontSize: 17,
+    fontWeight: "bold"
   },
   infoContainer: {
     flexDirection: "row",
@@ -68,6 +67,9 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     overflow: "hidden",
   },
+  buttomPressed: {
+    opacity: 0.5
+},
 });
 
 export default MealItem;
