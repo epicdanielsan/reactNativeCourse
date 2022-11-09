@@ -1,12 +1,14 @@
-import { StyleSheet, Text, View } from "react-native";
+import { View, Text, StyleSheet } from 'react-native';
 
-const List = ({ itensList }) => {
-  return itensList.map((item) => (
-    <View key={item} style={styles.listItem}>
-      <Text style={styles.itemText}>{item}</Text>
+function List({ data }) {
+  return data.map((dataPoint) => (
+    <View key={dataPoint} style={styles.listItem}>
+      <Text style={styles.itemText}>{dataPoint}</Text>
     </View>
   ));
-};
+}
+
+export default List;
 
 const styles = StyleSheet.create({
   listItem: {
@@ -15,12 +17,10 @@ const styles = StyleSheet.create({
     paddingVertical: 4,
     marginVertical: 4,
     marginHorizontal: 12,
-    backgroundColor: "#bcaaa4",
+    backgroundColor: '#e2b497',
   },
   itemText: {
-    color: "#4E342E",
-    textAlign: "center",
+    color: '#351401',
+    textAlign: 'center',
   },
 });
-
-export default List;
